@@ -8,13 +8,30 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
   
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
-          node-version: ${{ matrix.node-version }} 
-      - run: npm install
-      - run: npm run build --if-present
+          username: giahao07092001
+          password: giahao098
+      
+      - name: Build Docker Image
+        run: docker build -t giahao07092001/mycv .
+
+      - name: Pulish image to docker hub
+        run: docker push giahao07092001/mycv:latest
+
+  deploy:
+    needs: build
+    runs-on: trumvps-1710000370
+
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull giahao07092001/mycv:latest
+      - name: Delete old container
+        run: docker run -d -p 8080:8080 --name mycvContainer giahao07092001/mycv
