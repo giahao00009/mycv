@@ -1,4 +1,3 @@
-import React from 'react'
 import background from '~/assets/projects-bg.jpg'
 
 export default function ProjectsSection() {
