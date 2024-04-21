@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
   
     steps:
       - name: Checkout Source
@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: trumvps-1710000370
+    runs-on: self-hosted
 
     steps:
       - name: Pull image from docker hub
