@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import background from './assets/bg-banner.png'
 import Banner from './components/Banner'
